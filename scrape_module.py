@@ -45,6 +45,3 @@ class Scrape_Coin(object):
                 row=date.replace(","," ")+","+price.replace(",","") + ","+high.replace(",","")+","+low.replace(",","")+","+close.replace(",","")+","+volume.replace(",","")+","+market_cap.replace(",","")+"\n" 
                 f.write(row)
             f.close()
-
-scraper = Scrape_Coin(coins=['bitcoin'])
-scraper.compile_csv()
