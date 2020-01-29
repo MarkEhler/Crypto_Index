@@ -20,7 +20,7 @@ class Scrape_Coin(object):
     def scrape_hist(self, coin):
         source=requests.get(f"https://coinmarketcap.com/currencies/{coin}/historical-data/?start={self.start_date}&end={self.end_date}").text
         page_soup=soup(source,"lxml")
-        scraped_page=page_soup.find_all("tr",{"class":"text-right"})
+        scraped_page=page_soup.find_all("tr",{"class":"cmc-table-row"})
         return scraped_page
     
     def compile_csv(self):
@@ -34,8 +34,8 @@ class Scrape_Coin(object):
             headers="Date,Open,High,Low,Close,Volume,Market_Cap\n"
             f.write(headers)
             for j in range(len(coin_list[i])):
-                date = coins[i][j].td.text
-                price_list = coins[i][j].find_all("td")
+                date = coin_list[i][j].td.text
+                price_list = coin_list[i][j].find_all("td")
                 price = price_list[1].text
                 high = price_list[2].text
                 low = price_list[3].text
